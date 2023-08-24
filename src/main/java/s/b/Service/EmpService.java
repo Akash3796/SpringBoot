@@ -31,4 +31,11 @@ public class EmpService {
 				
 				return null;
 			}
+
+			public EmpEntities getDeleteById(int id) {
+				
+				empDao.deleteById(id);
+				
+				return null;
+			}
 }
