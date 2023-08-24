@@ -37,10 +37,22 @@ public class HomeController {
 		
 		}*/
 		
+			/* ---------------------OR--------------------------- */
+		
 		@PostMapping("/employeeSelect/id/{id}")
 		public EmpEntities empGetId(@PathVariable int id) {
 			
 			return empService.getById(id);
+		
+		}
+		
+		@DeleteMapping("/employeeDelete/id/{id}")
+		
+		public String empDeleteGetId(@PathVariable int id) {
+			
+			 empService.getDeleteById(id);
+		
+			return "Employee Deleted Successfully..";
 		
 		}
 		
