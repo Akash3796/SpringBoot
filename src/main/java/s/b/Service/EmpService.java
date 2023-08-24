@@ -1,5 +1,7 @@
 package s.b.Service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,4 +19,16 @@ public class EmpService {
 			empDao.save(empEntities);
 			
 		}
+
+			public EmpEntities getById(int id) {
+				
+				Optional<EmpEntities> e =	empDao.findById(id);
+				
+				if (e.isPresent()) {
+					
+					return e.get();
+				}
+				
+				return null;
+			}
 }
