@@ -1,9 +1,11 @@
 package s.b.Controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,6 +48,8 @@ public class HomeController {
 		
 		}
 		
+		/* ----------------Employee  Delete ------------------*/
+		
 		@DeleteMapping("/employeeDelete/id/{id}")
 		
 		public String empDeleteGetId(@PathVariable int id) {
@@ -54,6 +58,31 @@ public class HomeController {
 		
 			return "Employee Deleted Successfully..";
 		
+		}
+		
+		
+		/* ----------------Employee  SelectAll ------------------*/
+				
+			
+		@GetMapping("/employeeSelectAll")
+		public  List<EmpEntities> Allemp(){
+				
+			List<EmpEntities> list = empService.getAllEmployee();
+			
+			return list;
+		
+		}
+		
+		
+		/* ----------------Employee  Select By Name ------------------*/
+		
+		@GetMapping("/employeeSelect/name/{name}")
+		public List<EmpEntities> empGetName(@PathVariable String name) {
+			
+			List<EmpEntities> list = empService.getByName(name);
+			
+			
+			return list;
 		}
 		
 }
