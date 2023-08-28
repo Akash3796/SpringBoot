@@ -5,17 +5,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 
 @Entity
 @Table(name = "datademo")
 public class EmpEntities {
-
+	
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
 	
+	@Size(max = 4, message = "Please Enter only 4 Char.." )
 	@Column(name = "name")
 	private String name;
 	
