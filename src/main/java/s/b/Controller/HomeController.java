@@ -3,24 +3,29 @@ package s.b.Controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.annotations.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import s.b.Entities.EmpEntities;
 import s.b.Service.EmpService;
 
+@RequestMapping("/employee")
+@CrossOrigin("*")
 @RestController
 public class HomeController {
 	
 	@Autowired
 	EmpService empService;
 	
-		@PostMapping("/employee")
+		@PostMapping("/add")
 		public String add(@RequestBody EmpEntities empEntities) {
 			
 			empService.add(empEntities);
@@ -32,7 +37,7 @@ public class HomeController {
 		/* ----------------Employee  Select ------------------*/
 		
 		
-		/*@PostMapping("/employeeSelect/id/{id}")
+		/*@PostMapping("/Select/id/{id}")
 		public Optional<EmpEntities> empGetId(@PathVariable int id) {
 			
 			return empService.getById(id);
@@ -41,7 +46,7 @@ public class HomeController {
 		
 			/* ---------------------OR--------------------------- */
 		
-		@PostMapping("/employeeSelect/id/{id}")
+		@PostMapping("/Select/id/{id}")
 		public EmpEntities empGetId(@PathVariable int id) {
 			
 			return empService.getById(id);
@@ -50,7 +55,7 @@ public class HomeController {
 		
 		/* ----------------Employee  Delete ------------------*/
 		
-		@DeleteMapping("/employeeDelete/id/{id}")
+		@DeleteMapping("/Delete/id/{id}")
 		
 		public String empDeleteGetId(@PathVariable int id) {
 			
@@ -63,8 +68,7 @@ public class HomeController {
 		
 		/* ----------------Employee  SelectAll ------------------*/
 				
-			
-		@GetMapping("/employeeSelectAll")
+		@GetMapping(produces="application/JSON")
 		public  List<EmpEntities> Allemp(){
 				
 			List<EmpEntities> list = empService.getAllEmployee();
@@ -76,7 +80,7 @@ public class HomeController {
 		
 		/* ----------------Employee  Select By Name ------------------*/
 		
-		@GetMapping("/employeeSelect/name/{name}")
+		@GetMapping("/Select/name/{name}")
 		public List<EmpEntities> empGetName(@PathVariable String name) {
 			
 			List<EmpEntities> list = empService.getByName(name);
