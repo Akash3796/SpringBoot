@@ -6,16 +6,20 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import s.b.Entities.EmpEntities;
 import s.b.Service.EmpService;
 
+@CrossOrigin("*")  // Browser varti data show karanyasathi
+@RequestMapping("/employee")  // common kadle..
 /*@PropertySource(value = "classpath:student.properties")*/
 @RestController
 public class HomeController {
@@ -30,7 +34,7 @@ public class HomeController {
 	private String msg;
 	
 	
-		@PostMapping("/employee")
+		@PostMapping("/add")
 		public String add(@RequestBody EmpEntities empEntities) {
 			
 			empService.add(empEntities);
@@ -51,7 +55,7 @@ public class HomeController {
 		
 			/* ---------------------OR--------------------------- */
 		
-		@PostMapping("/employeeSelect/id/{id}")
+		@PostMapping("/Select/id/{id}")
 		public EmpEntities empGetId(@PathVariable int id) {
 			
 			System.out.println(welmsg);
@@ -62,7 +66,7 @@ public class HomeController {
 		
 		/* ----------------Employee  Delete ------------------*/
 		
-		@DeleteMapping("/employeeDelete/id/{id}")
+		@DeleteMapping("/Delete/id/{id}")
 		public String empDeleteGetId(@PathVariable int id) {
 			
 			 empService.getDeleteById(id);
@@ -74,8 +78,8 @@ public class HomeController {
 		
 		/* ----------------Employee  SelectAll ------------------*/
 				
-			
-		@GetMapping("/employeeSelectAll")
+	/*	@CrossOrigin("*")*/
+		@GetMapping(produces="application/JSON") //Browser varti kontya format made data pahije tyasathi..  like: JSON,xml,....
 		public  List<EmpEntities> Allemp(){
 				
 			List<EmpEntities> list = empService.getAllEmployee();
@@ -89,7 +93,7 @@ public class HomeController {
 		
 		/* ----------------Employee  Select By Name ------------------*/
 		
-		@GetMapping("/employeeSelect/name/{name}")
+		@GetMapping("/Select/name/{name}")
 		public List<EmpEntities> empGetName(@PathVariable String name) {
 			
 			List<EmpEntities> list = empService.getByName(name);
